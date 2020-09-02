@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>Heart Disease Detection using AdaBoost Classifier</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+
+<body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <a class="navbar-brand" href="#">Heart Disease Detection</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+    	<li class="nav-item">
+        <a class="nav-link navbar-brand" href="#">Home</a><span class="sr-only">(current)</span>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link navbar-brand" href="form1.html">Fill Up</a><span class="sr-only">(current)</span>
+      </li> -->
+    </ul>
+  </div>
+</nav>
+</header>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../static/images/alone-red.jpg" alt="Los Angeles" width="1100" height="500">
+    </div>
+    <div class="carousel-item">
+      <img src="../static/images/what-to-do-if-you-think-youre-having-heart-attack.jpg" alt="Chicago" width="1100" height="500">
+    </div>
+    <div class="carousel-item">
+      <img src="../static/images/Cardiology.jpg" alt="New York" width="1100" height="500">
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+<br><br><br><br>
+<section>
+	<div>
+<center>
+    <h1 class="text-danger">{{ prediction_text }}</h1>
+  </center>
+  </div>
+</section>
+
+	<section class="my-5">
+		<div class="py-5">
+			<h2 class="text-center">About Heart Disease</h2>
+		</div>
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-12">
+				<img src="../static/images/anx-vs-heart.png" class="img-fluid">
+			</div>
+			<div class="col-lg-6 col-md-6 col-12">
+				<h4>Overview</h4>
+					<p class="py-2">
+				Heart disease describes a range of conditions that affect your heart. Diseases under the heart disease umbrella include blood vessel diseases, such as coronary artery disease; heart rhythm problems (arrhythmias); and heart defects you're born with (congenital heart defects), among others.</p>
+
+				<p>The term "heart disease" is often used interchangeably with the term "cardiovascular disease." Cardiovascular disease generally refers to conditions that involve narrowed or blocked blood vessels that can lead to a heart attack, chest pain (angina) or stroke.</p>
+				<p> Other heart conditions, such as those that affect your heart's muscle, valves or rhythm, also are considered forms of heart disease.
+				Many forms of heart disease can be prevented or treated with healthy lifestyle choices.</p> 
+			</p>
+			</div>
+		</div>
+	</div>
+	</section>
+
+
+
+
+
+
+<div>
+<section class="form_to_predict">
+  <form action="{{ url_for('predict')}}" method="POST">
+    <fieldset>
+  <h1 class="title">PLease fill in serially</h1>
+  <div class="container">
+    <div class="contact-form row">
+      <div class="form-field col-lg-6">
+        <input id="name" class="input-text" type="text" name="age">
+        <label for="name" class="label">1. Age:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="sex" class="input-text" type="text" name="sex">
+        <label for="sex" class="label">2. Sex:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="cp" class="input-text" type="text" name="cp">
+        <label for="cp" class="label">3. Chect-pain type:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="trestbps" class="input-text" type="text" name="trestbps">
+        <label for="trestbps" class="label">4. Resting Blood Pressure:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="chol" class="input-text" type="text" name="chol">
+        <label for="chol" class="label">5. Serum Cholestrol:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="fbs" class="input-text" type="text" name="fbs">
+        <label for="fbs" class="label">6. Fasting Blood Sugar:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="restecg" class="input-text" type="text" name="restecg">
+        <label for="restecg" class="label">7. Resting ECG:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="thalach" class="input-text" type="text" name="thalach">
+        <label for="thalach" class="label">8. Max heart rate achieved:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="exang" class="input-text" type="text" name="exang">
+        <label for="exang" class="label">9. Exercise induced angina:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="oldpeak" class="input-text" type="text" name="oldpeak">
+        <label for="oldpeak" class="label">10. ST depression induced:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="slope" class="input-text" type="text" name="slope">
+        <label for="slope" class="label">11. Peak exercise ST segment:</label>
+      </div>
+      <div class="form-field col-lg-6">
+        <input id="ca" class="input-text" type="text" name="ca">
+        <label for="ca" class="label">12. Colored Flourosopy:</label>
+      </div>
+      <div class="form-field col-lg-12">
+        <input id="thal" class="input-text" type="text" name="thal">
+        <label for="thal" class="label">13. Thalassemia:</label>
+      </div>
+      <div class="form-field col-lg-12">
+        <button type="submit" class="submit-btn">Predict</button>
+        <!-- <input class="submit-btn" type="submit" name=""> -->
+      </div>
+
+    </div>
+  </div>
+</form>
+</section>
+
+
+	<section class="my-5">
+		<div class="py-5">
+			<h2 class="text-center">Related Images</h2>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-12">
+					<div class="card">
+					  <img class="card-img-top" src="../static/images/images (1).jpg" alt="Card image">
+					  	<div class="card-body">
+					    	<h4 class="card-title">Electrocardiogram (ECG)</h4>
+					    	<p class="card-text">An electrocardiogram (ECG or EKG) records the electrical signal from your heart to check for different heart conditions. Electrodes are placed on your chest to record your heart's electrical signals, which cause your heart to beat. The signals are shown as waves on an attached computer monitor or printer</p>
+					  	</div>
+					</div>					
+				</div>
+
+
+				<div class="col-lg-4 col-md-4 col-12">
+					<div class="card">
+					  <img class="card-img-top" src="../static/images/avoid-heart-disease.jpg" alt="Card image">
+					  	<div class="card-body">
+					    	<h4 class="card-title">A Healthy Heart</h4>
+					    	<p class="card-text">For the despondent, every day brings trouble; for the happy heart, life is a continual feast. </p>
+					    		<p><center>– Proverbs 15:15</center> </p>
+					  	</div>
+					</div>					
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-12">
+					<div class="card">
+					  <img class="card-img-top" src="../static/images/dill.jpg" alt="Card image">
+					  	<div class="card-body">
+					    	<h4 class="card-title">Normal heart rate</h4>
+					    	<p class="card-text">A normal resting heart rate for adults ranges from 60 to 100 beats per minute.  For example, a well-trained athlete might have a normal resting heart rate closer to 40 beats per minute.</p>
+					  	</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+<br><br><br>
+		
+<section class="down">
+	<footer>
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-6 col-xs-8 segment-one md-mb-30 sm-mb-30">
+						<h3>About the ML Model</h3>
+						<p>Here AdaBoost Classifier and RandomForest Classifier is used as Machine Learning
+						Model which produces the highest accuracy compared to other ML models. It may not be 100% accurate since i'm in a learning process.</p>
+					</div>
+					<div class="col-md-4 col-sm-8 col-xs-12 segment-two md-mb-30 sm-mb-30">
+						<h2>Reference links</h2>
+						<ul>
+							<li><a href="https://www.youtube.com/watch?v=4jelwvPcS8w">Footer build</a></li>
+							<li><a href="https://www.youtube.com/watch?v=hgXlhxxLDNc&list=WL&index=46&t=0s">Model build</a></li>
+							<li><a href="https://www.youtube.com/watch?v=YP4DUjRMn2M">Deployed</a></li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-sm-8 col-xs-12 segment-three md-mb-30">
+						<h2>follow</h2>
+						<p>If you have any queries fell free</p>
+						<a href="https://www.linkedin.com/in/subodhkumar-ray/"><i class="fa fa-linkedin"></i></a>
+						<a href="https://github.com/Subodh0"><i class="fa fa-github"></i></a>
+						<a href="#"><i class="fa fa-instagram"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="footer-bottom-text">Designed by &copy; Subodh Kumar Ray 2020</p>
+	</footer>
+</section>
+
+  </body>
+</html>
+
