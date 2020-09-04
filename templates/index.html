@@ -122,55 +122,108 @@
   <div class="container">
     <div class="contact-form row">
       <div class="form-field col-lg-6">
-        <input id="name" class="input-text" type="text" name="age">
+        <input id="name" class="input-text" type="text" name="age" required="required">
         <label for="name" class="label">1. Age:</label>
       </div>
-      <div class="form-field col-lg-6">
+     <!--  <div class="form-field col-lg-6">
         <input id="sex" class="input-text" type="text" name="sex">
         <label for="sex" class="label">2. Sex:</label>
+      </div> -->
+ 		<div class="form-field col-lg-6">
+        <select id="sex" name="sex" class="input-text" required="required">
+        	<option value="">Choose the gender(0-1)</option>
+          <option value="0">Female</option>
+          <option value="1">Male</option>
+        </select>
+         <label for="sex" class="label">2. Sex:</label>
       </div>
-      <div class="form-field col-lg-6">
+
+      <!-- <div class="form-field col-lg-6">
         <input id="cp" class="input-text" type="text" name="cp">
         <label for="cp" class="label">3. Chect-pain type:</label>
+      </div> -->
+      <div class="form-field col-lg-6">
+        <select id="cp" name="cp" class="input-text" required="required">
+        	<option value="">Choose from below(1-4)</option>
+          <option value="1">Typical angina</option>
+          <option value="2">Atypical angina</option>
+          <option value="3">Non-anginal pain angina</option>
+          <option value="4">Asymtomatic</option>
+        </select>
+         <label for="cp" class="label">3. Chest-pain type:</label>
       </div>
       <div class="form-field col-lg-6">
-        <input id="trestbps" class="input-text" type="text" name="trestbps">
+        <input id="trestbps" class="input-text" type="text" name="trestbps" required="required">
         <label for="trestbps" class="label">4. Resting Blood Pressure:</label>
       </div>
       <div class="form-field col-lg-6">
-        <input id="chol" class="input-text" type="text" name="chol">
+        <input id="chol" class="input-text" type="text" name="chol" required="required">
         <label for="chol" class="label">5. Serum Cholestrol:</label>
       </div>
-      <div class="form-field col-lg-6">
+      <!-- <div class="form-field col-lg-6">
         <input id="fbs" class="input-text" type="text" name="fbs">
         <label for="fbs" class="label">6. Fasting Blood Sugar:</label>
-      </div>
+      </div> -->
       <div class="form-field col-lg-6">
+        <select id="fbs" name="fbs" class="input-text" required="required">
+        	<option value="">Choose from below(0-1)</option>
+          <option value="0">True</option>
+          <option value="1">False</option>
+        </select>
+         <label for="fbs" class="label">6. Fasting Blood Sugar:</label>
+      </div>
+     <!--  <div class="form-field col-lg-6">
         <input id="restecg" class="input-text" type="text" name="restecg">
         <label for="restecg" class="label">7. Resting ECG:</label>
+      </div> -->
+       <div class="form-field col-lg-6">
+        <select id="restecg" name="restecg" class="input-text" required="required">
+        	<option value="">Choose from below(0-1)</option>
+          <option value="0">Normal</option>
+          <option value="1">Abnormality</option>
+        </select>
+         <label for="restecg" class="label">7. Resting ECG:</label>
       </div>
+
       <div class="form-field col-lg-6">
-        <input id="thalach" class="input-text" type="text" name="thalach">
+        <input id="thalach" class="input-text" type="text" name="thalach" required="required">
         <label for="thalach" class="label">8. Max heart rate achieved:</label>
       </div>
-      <div class="form-field col-lg-6">
+     <!--  <div class="form-field col-lg-6">
         <input id="exang" class="input-text" type="text" name="exang">
         <label for="exang" class="label">9. Exercise induced angina:</label>
+      </div> -->
+      <div class="form-field col-lg-6">
+        <select id="exang" name="exang" class="input-text" required="required">
+        	<option value="">Choose from below(0-1)</option>
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+         <label for="exang" class="label">9. Exercise induced angina:</label>
       </div>
       <div class="form-field col-lg-6">
-        <input id="oldpeak" class="input-text" type="text" name="oldpeak">
+        <input id="oldpeak" class="input-text" type="text" name="oldpeak" required="required">
         <label for="oldpeak" class="label">10. ST depression induced:</label>
       </div>
-      <div class="form-field col-lg-6">
+      <!-- <div class="form-field col-lg-6">
         <input id="slope" class="input-text" type="text" name="slope">
         <label for="slope" class="label">11. Peak exercise ST segment:</label>
+      </div> -->
+      <div class="form-field col-lg-6">
+        <select id="slope" name="slope" class="input-text" required="required">
+        	<option value="">Choose from below(1-3)</option>
+          <option value="1">Upsloping</option>
+          <option value="2">Flat</option>
+          <option value="3">Downsloping</option>
+        </select>
+         <label for="slope" class="label">11. Peak exercise ST segment:</label>
       </div>
       <div class="form-field col-lg-6">
-        <input id="ca" class="input-text" type="text" name="ca">
-        <label for="ca" class="label">12. Colored Flourosopy:</label>
+        <input id="ca" class="input-text" type="text" name="ca" required="required">
+        <label for="ca" class="label">12. Colored Flourosopy (0-3):</label>
       </div>
       <div class="form-field col-lg-12">
-        <input id="thal" class="input-text" type="text" name="thal">
+        <input id="thal" class="input-text" type="text" name="thal" required="required">
         <label for="thal" class="label">13. Thalassemia:</label>
       </div>
       <div class="form-field col-lg-12">
